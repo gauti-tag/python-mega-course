@@ -7,8 +7,9 @@ while True:
             user = input("Enter a todo: ")
             todos.append(user)
         case "show" | "display":
-            for item in todos:
-                print(f"Todo: {item.title()}")
+            # Enumerate function generate indexing for a list
+            for index, item in enumerate(todos):
+                print(f"Todo n°{index + 1}: {item.title()}")
         case "edit":
             number = int(input("Number of the todo to edit: "))
             number = number - 1
