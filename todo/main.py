@@ -1,12 +1,23 @@
-
-todos = []
 while True:
     user_action = input("Type add, show, edit, complete or exit: ").strip()
     match user_action:
         case "add": 
-            user = input("Enter a todo: ")
-            todos.append(user)
+            todo = input("Enter a todo: ") + "\n"
+            file_content = open('todo/todos.txt', 'r')
+            todos = file_content.readlines()
+            file_content.close()
+            
+            todos.append(todo)
+            
+            file_content = open('todo/todos.txt', 'w')
+            file_content.writelines(todos)
+            file_content.close()
         case "show" | "display":
+            #Fetch data from file
+            file_content = open('todo/todos.txt', 'r')
+            todos = file_content.readlines()
+            file_content.close
+            
             # Enumerate function generate indexing for a list
             for index, item in enumerate(todos):
                 print(f"Todo n°{index + 1}: {item.title()}")
