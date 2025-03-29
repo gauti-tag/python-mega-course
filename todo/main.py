@@ -1,30 +1,23 @@
 while True:
+    # Get user input and strip space chars from it
     user_action = input("Type add, show, edit, complete or exit: ").strip()
     match user_action:
+        # Check if user action is "add"
         case "add": 
             todo = input("Enter a todo: ") + "\n"
-            #Fetch the existing todos list
-            file_content = open('todo/todos.txt', 'r')
-            todos = file_content.readlines()
-            file_content.close()
+            #Fetch the existing todos list        
+            with open('todo/todos.txt', 'r') as file_content:
+                todos = file_content.readlines()
             
             todos.append(todo)
-            
-            file_content = open('todo/todos.txt', 'w')
-            file_content.writelines(todos)
-            file_content.close()
+                        
+            with open('todo/todos.txt', 'w') as file_content:
+                file_content.writelines(todos)
+                
         case "show" | "display":
-            #Fetch data from file
-            file_content = open('todo/todos.txt', 'r')
-            todos = file_content.readlines()
-            file_content.close
-            
-            #new_todos = []
-            #for item in todos:
-            #    new_todos.append(item.strip('\n'))
-            
-            # A list comprehension
-            #new_todos = [item.strip('\n') for item in todos]
+            #Fetch data from file    
+            with open('todo/todos.txt', 'r') as file_content:
+                todos = file_content.readlines()
             
             # Enumerate function generate indexing for a list
             for index, item in enumerate(todos):
