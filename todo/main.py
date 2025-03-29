@@ -3,6 +3,7 @@ while True:
     match user_action:
         case "add": 
             todo = input("Enter a todo: ") + "\n"
+            #Fetch the existing todos list
             file_content = open('todo/todos.txt', 'r')
             todos = file_content.readlines()
             file_content.close()
@@ -18,8 +19,16 @@ while True:
             todos = file_content.readlines()
             file_content.close
             
+            #new_todos = []
+            #for item in todos:
+            #    new_todos.append(item.strip('\n'))
+            
+            # A list comprehension
+            #new_todos = [item.strip('\n') for item in todos]
+            
             # Enumerate function generate indexing for a list
             for index, item in enumerate(todos):
+                item = item.strip('\n')
                 print(f"Todo n°{index + 1}: {item.title()}")
         case "edit":
             number = int(input("Number of the todo to edit: "))
