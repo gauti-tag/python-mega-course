@@ -3,18 +3,18 @@ while True:
     user_action = input("Type add, show, edit, complete or exit: ").strip()
   
     # Check if user action is "add"
-    if "add" in user_action: 
+    if user_action.startswith("add"): 
         todo = user_action[4:]
         #Fetch the existing todos list        
         with open('todo/todos.txt', 'r') as file_content:
             todos = file_content.readlines()
         
-        todos.append(todo)
+        todos.append(todo + '\n')
                     
         with open('todo/todos.txt', 'w') as file_content:
             file_content.writelines(todos)
             
-    elif "show" in user_action:
+    elif user_action.startswith("show"):
         #Fetch data from file    
         with open('todo/todos.txt', 'r') as file_content:
             todos = file_content.readlines()
@@ -23,7 +23,7 @@ while True:
         for index, item in enumerate(todos):
             item = item.strip('\n')
             print(f"Todo n°{index + 1}: {item.title()}")
-    elif "edit" in user_action:
+    elif user_action.startswith("edit"):
         number = int(user_action[5:])
         number = number - 1
         
@@ -36,7 +36,7 @@ while True:
         with open('todo/todos.txt', 'w') as file_content:
             file_content.writelines(todos)
             
-    elif "complete" in user_action:
+    elif user_action.startswith("complete"):
         number = int(user_action[9:])
         
         with open('todo/todos.txt', 'r') as file_content:
@@ -51,7 +51,7 @@ while True:
         message = f"Todo {todo_to_remove} was removed from the list"
         print(message)
         
-    elif "exit" in user_action:
+    elif user_action.startswith("exit"):
         break
     else:
         print("Command is not valid.")
