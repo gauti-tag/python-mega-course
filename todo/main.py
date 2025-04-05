@@ -24,32 +24,40 @@ while True:
             item = item.strip('\n')
             print(f"Todo n°{index + 1}: {item.title()}")
     elif user_action.startswith("edit"):
-        number = int(user_action[5:])
-        number = number - 1
-        
-        with open('todo/todos.txt', 'r') as file_content:
-            todos = file_content.readlines()
+        try:
+            number = int(user_action[5:])
+            number = number - 1
             
-        new_todo = input("Enter new todo: ")
-        todos[number] =  new_todo + "\n"
-        
-        with open('todo/todos.txt', 'w') as file_content:
-            file_content.writelines(todos)
+            with open('todo/todos.txt', 'r') as file_content:
+                todos = file_content.readlines()
+                
+            new_todo = input("Enter new todo: ")
+            todos[number] =  new_todo + "\n"
+            
+            with open('todo/todos.txt', 'w') as file_content:
+                file_content.writelines(todos)
+        except ValueError:
+            print('Your command is not valid')
+            continue
             
     elif user_action.startswith("complete"):
-        number = int(user_action[9:])
-        
-        with open('todo/todos.txt', 'r') as file_content:
-            todos = file_content.readlines()
-        index = number - 1
-        todo_to_remove = todos[index].strip('\n')
-        todos.pop(index)
-        
-        with open('todo/todos.txt', 'w') as file_content:
-            file_content.writelines(todos)
+        try:
+            number = int(user_action[9:])
             
-        message = f"Todo {todo_to_remove} was removed from the list"
-        print(message)
+            with open('todo/todos.txt', 'r') as file_content:
+                todos = file_content.readlines()
+            index = number - 1
+            todo_to_remove = todos[index].strip('\n')
+            todos.pop(index)
+            
+            with open('todo/todos.txt', 'w') as file_content:
+                file_content.writelines(todos)
+                
+            message = f"Todo {todo_to_remove} was removed from the list"
+            print(message)
+        except IndexError:
+            print('There is no item with that number')
+            continue
         
     elif user_action.startswith("exit"):
         break
