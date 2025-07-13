@@ -12,3 +12,7 @@ def write_todos(todos_arg, filpath = 'todo/todos.txt'):
     with open(filpath, 'w') as file_content_local:
         file_content_local.writelines(todos_arg)
 
+
+if __name__ == "__main__":
+    print("hello from functions")
+    print(get_todos())
